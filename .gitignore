@@ -30,3 +30,6 @@
 
 # Debug files
 *.dSYM/
+
+udp_tproxy
+tcp_tproxy
