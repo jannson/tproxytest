@@ -107,8 +107,8 @@ int handle_client (int c, struct sockaddr_in *clntaddr)
 
         /* get original destination address */
         n=sizeof(struct sockaddr_in);
-        ret = getsockopt (c, SOL_IP, IP_ORIGDSTADDR, &dstaddr, &n); // IP_ORIGDSTADDR = 20
-        //ret = getsockopt (c, SOL_IP, SO_ORIGINAL_DST, &dstaddr, &n); // SO_ORIGINAL_DST = 80
+        //ret = getsockopt (c, SOL_IP, IP_ORIGDSTADDR, &dstaddr, &n); // IP_ORIGDSTADDR = 20
+        ret = getsockopt (c, SOL_IP, SO_ORIGINAL_DST, &dstaddr, &n); // SO_ORIGINAL_DST = 80
 
         if (ret != 0)
         {
@@ -118,8 +118,8 @@ int handle_client (int c, struct sockaddr_in *clntaddr)
         }
 
         dstaddr.sin_family = AF_INET;
-        inet_aton("192.168.1.1", &dstaddr.sin_addr.s_addr);
-        dstaddr.sin_port = htons(8080);
+        //inet_aton("10.1.1.90", &dstaddr.sin_addr.s_addr);
+        //dstaddr.sin_port = htons(8080);
         printf ("original destination address %X:%d\n", dstaddr.sin_addr.s_addr, dstaddr.sin_port);
 
         ret = tunnel_transparently (c, clntaddr, &dstaddr);
